@@ -3,6 +3,15 @@ import people from "./data";
 import { faChevronCircleLeft, FaChevronCircleRight } from "react-icons/fa";
 
 function Review() {
+  const [ index,setIndex] =useState(0);
+  const {name, job, image,text} = people[index]
+
+const nextPerson = () =>{
+  setIndex((index) => {
+
+  })
+}
+
   return (
     <article className="review">
       <div className="img-container">
@@ -21,6 +30,9 @@ function Review() {
           <faChevronCircleRight/>
         </button>
       </div>
+      <button className="random-btn">
+Random Character
+      </button>
     </article>
   );
 }
