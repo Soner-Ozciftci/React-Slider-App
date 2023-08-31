@@ -1,37 +1,54 @@
 import React, { useState } from "react";
 import people from "./data";
-import { faChevronCircleLeft, FaChevronCircleRight } from "react-icons/fa";
+import { FaChevronCircleLeft, FaChevronCircleRight } from "react-icons/fa";
 
 function Review() {
-  const [ index,setIndex] =useState(0);
-  const {name, job, image,text} = people[index]
-
-const nextPerson = () =>{
-  setIndex((index) => {
-
-  })
-}
+  const [index, setIndex] = useState(0);
+  const { name, job, image, text } = people[index];
+  const nextPerson = () => {
+    setIndex((index) => {
+      let newIndex = index + 1;
+      if (newIndex > people.length - 1) {
+        newIndex = 0;
+      }
+      return newIndex;
+    });
+  };
+  const prevPerson = () => {
+    setIndex((index) => {
+      let newIndex = index - 1;
+      if (newIndex < 0) {
+        newIndex = 4;
+      }
+      return newIndex;
+    });
+  };
+  const randomPerson = () => {
+    let randomNumber = Math.floor(Math.random() * people.length);
+    setIndex(randomNumber);
+  };
 
   return (
     <article className="review">
       <div className="img-container">
-        <img src="https://upload.wikimedia.org/wikipedia/tr/0/03/Walter_White_S5B.png" alt="" />
+        <img src={image} alt={name} className="person-img" />
       </div>
       <div className="name-job">
-        <h4 className="name">Walter White</h4>
-        <p className="job">Meth Manufacturer</p>
+        <h4 className="name">{name}</h4>
+        <p className="job">{job}</p>
       </div>
-      <p className="info">text</p>
+
+      <p className="info">{text}</p>
       <div className="button-container">
         <button className="prev-btn">
-          <faChevronCircleLeft/>
+          <FaChevronCircleLeft onClick={prevPerson} />
         </button>
-        <button className="next-btn">
-          <faChevronCircleRight/>
+        <button className="next-btn" onClick={nextPerson}>
+          <FaChevronCircleRight />
         </button>
       </div>
-      <button className="random-btn">
-Random Character
+      <button className="random-btn" onClick={randomPerson}>
+        Random Character
       </button>
     </article>
   );
